@@ -23,7 +23,7 @@ Leveraging Terraform's power to automate the entire process.
 
 Ready to bring your EKS cluster to life? Follow these simple incantations:
 
-1. **Create a key**: Create a key pair that will be used for connecting to Bastion Host and EKS Node Group instances. In the AWS Console EC2:
+1. **Create a key**: Create a key pair that will be used for connecting to Bastion Host and EKS Node Group instances. In the AWS Console:
    
    EC2 -> Network & Security -> Key Pairs -> Create Key Pair
 
