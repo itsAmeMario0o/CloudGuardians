@@ -53,7 +53,8 @@ Ready to bring your EKS cluster to life? Follow these simple incantations:
    ```bash
    terraform apply -auto-approve
 
-**Grab a schnaack**
+
+## Grab a schnaack
 
 Verify and Enjoy! 🎉
 
