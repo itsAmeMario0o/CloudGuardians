@@ -28,6 +28,7 @@ Ready to unleash your potential? Here's how you can start:
 
 
 **Clone the Repo**: Grab the project's code and explore the resources.
+
     ```bash
     git clone https://github.com/itsAmeMario0o/CloudGuardians
 
