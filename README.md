@@ -17,10 +17,13 @@ Our mission is simple: to empower curious engineers like you to dive headfirst i
 By embarking on this journey, you'll gain insights into:
 
 
-**Cloud Platforms**: Get hands-on experience with leading cloud providers like AWS and Kubernetes.
-**Infrastructure as Code**: Master tools like Terraform to build and manage your infrastructure with elegance and precision.
-**Cloud-Native Tools**: Explore shell, yaml, IPTables, eBPF, EIEIO.
-**Security Best Practices**: Implement strategies to keep your cloud environments safe from threats.
+**Cloud Platforms**: Get hands-on experience with leading cloud providers like AWS and Kubernetes.<br />
+
+**Infrastructure as Code**: Master tools like Terraform to build and manage your infrastructure with elegance and precision.<br />
+
+**Cloud-Native Tools**: Explore shell, yaml, IPTables, eBPF, EIEIO.<br />
+
+**Security Best Practices**: Implement strategies to keep your cloud environments safe from threats.<br />
 
 ## How to Get Started 🏁
 
