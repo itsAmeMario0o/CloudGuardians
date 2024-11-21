@@ -1,7 +1,7 @@
----
-title: 🚀 Terraform Wizardry: Conjuring EKS Clusters and Node Groups with Ease! 🧙‍♂️
-description: Effortlessly install all the essential tools you need to kickstart your adventures. Ready, set, code!" 🚀✨
----
+🚀 Terraform Wizardry: Conjuring EKS Clusters and Node Groups with Ease! 🧙‍♂️
+
+Effortlessly install all the essential tools you need to kickstart your adventures. Ready, set, code!" 🚀✨
+
 
 Welcome to the magical world of infrastructure as code, where deploying an AWS EKS cluster and its mighty node groups is as easy as a flick of the wand—or, in this case, a few Terraform commands! 🪄
 
@@ -67,4 +67,4 @@ Once your cluster is up and running, use the AWS Management Console to explore y
    cd /tmp
    ls -lrta
 
-   Observation: We should find the file named "eks-lab-key.pem" copied from our local desktop to Bastion "/tmp" folder
+   NOTE: The file named "eks-lab-key.pem" copied from our local desktop to Bastion "/tmp" folder.
