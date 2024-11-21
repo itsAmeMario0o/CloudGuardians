@@ -1,4 +1,4 @@
-🚀 Terraform Wizardry: Conjuring EKS Clusters and Node Groups with Ease! 🧙‍♂️
+# 🚀 Terraform Wizardry: Conjuring EKS Clusters and Node Groups with Ease! 🧙‍♂️
 
 Effortlessly install all the essential tools you need to kickstart your adventures. Ready, set, code!" 🚀✨
 

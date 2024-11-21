@@ -1,10 +1,10 @@
- 🔒 Secure Your Cloud: Integrating Cisco Secure Workload with Your Hybrid Multicloud Environment! 
+# 🔒 Secure Your Cloud: Integrating Cisco Secure Workload with Your Hybrid Multicloud Environment! 
 
 
 Welcome to the next level of cloud security! In a world where your applications are spread across bare metal, virtual, and container-based workloads, keeping data secure without losing agility is a superpower. Enter Cisco Secure Workload—a hero in disguise, bringing security closer to your applications through advanced machine learning and behavior analysis. 🦸‍♂️
 
 
-What Does Cisco Secure Workload Do? 🔍
+## What Does Cisco Secure Workload Do? 🔍
 
 Cisco Secure Workload is your fortress of solitude in the cloud, offering comprehensive protection with the following capabilities:
 
@@ -14,7 +14,7 @@ Cisco Secure Workload is your fortress of solitude in the cloud, offering compre
 **Vulnerability Detection**: Identify and manage Common Vulnerabilities and Exposures (CVEs) in software packages. 🔧
 **Quarantine Recommendations**: Suggest isolating servers if vulnerabilities are found after policy enforcement. 🚨
 
-AWS Connector: Bridging the Gap 🌉
+## AWS Connector: Bridging the Gap 🌉
 
 Cisco Secure Workload seamlessly integrates with AWS, enhancing your cloud security with:
 
@@ -24,15 +24,15 @@ Cisco Secure Workload seamlessly integrates with AWS, enhancing your cloud secur
 **Segmentation Magic**: Program security policies using AWS native Security Groups for robust segmentation. 🔗
 **EKS Metadata Gathering**: Gather all node, service, and pod metadata from your EKS clusters for comprehensive oversight. 🚀
 
-How to Get Started 🏁
+## How to Get Started 🏁
 
 Integrating Cisco Secure Workload into your environment is like equipping your infrastructure with an impenetrable shield. Here's how you begin:
 
 
-Connect to AWS: Set up the AWS connector to start ingesting metadata and flow logs.
-Define Policies: Use the ingested data to define and enforce microsegmentation policies.
-Monitor and Adjust: Keep an eye on workloads for anomalies and vulnerabilities, and adjust policies as needed.
-Leverage EKS Data: Use the gathered EKS metadata to enhance your security posture.
+**Connect to AWS**: Set up the AWS connector to start ingesting metadata and flow logs.
+**Define Policies**: Use the ingested data to define and enforce microsegmentation policies.
+**Monitor and Adjust**: Keep an eye on workloads for anomalies and vulnerabilities, and adjust policies as needed.
+**Leverage EKS Data**: Use the gathered EKS metadata to enhance your security posture.
 
 With Cisco Secure Workload, you're not just deploying security—you're embedding it directly into your applications. So gear up and let your cloud infrastructure shine with the power of Secure Workload! 🌟
 

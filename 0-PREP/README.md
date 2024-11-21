@@ -1,7 +1,6 @@
----
-title: The Ultimate Setup Script!" 🎩💻
-description: Effortlessly install all the essential tools you need to kickstart your adventures. Ready, set, code!" 🚀✨
----
+# The Ultimate Setup Script!" 🎩💻
+
+Effortlessly install all the essential tools you need to kickstart your adventures. Ready, set, code!" 🚀✨
 
 # Welcome to the Ultimate Dev Environment Setup!
 
