@@ -1,0 +1,28 @@
+# kubectl apply -f E2-tp-tcp-conn.yaml -n estore
+# kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout -f | tetra getevents -o compact --namespace estore --pod frontend
+# kubectl get pod -n estore | grep frontend
+# kubectl exec -n estore -it frontend-5876dfc55-jcpvl -- curl http://cilium.io
+
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: "connect"
+spec:
+  kprobes:
+  - call: "tcp_connect"
+    syscall: false
+    args:
+    - index: 0
+      type: "sock"
+  - call: "tcp_close"
+    syscall: false
+    args:
+    - index: 0
+      type: "sock"
+  - call: "tcp_sendmsg"
+    syscall: false
+    args:
+    - index: 0
+      type: "sock"
+    - index: 2
+      type: int

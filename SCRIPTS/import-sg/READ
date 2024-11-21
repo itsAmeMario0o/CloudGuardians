@@ -1,0 +1,16 @@
+# Navigate to your project directory
+cd my_project
+
+# Create a virtual environment named 'env'
+python3 -m venv env
+
+# Activate the virtual environment
+source env/bin/activate  # On macOS/Linux
+# or
+env\Scripts\activate  # On Windows
+
+# Install dependencies from requirements.txt
+pip install -r requirements.txt
+
+# Deactivate the virtual environment when done
+deactivate

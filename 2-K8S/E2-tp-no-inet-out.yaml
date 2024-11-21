@@ -1,0 +1,22 @@
+---
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicyNamespaced
+metadata:
+  name: "no-internet-out"
+spec:
+  kprobes:
+  - call: "tcp_connect"
+    syscall: false
+    args:
+    - index: 0
+      type: "sock"
+    selectors:
+    - matchArgs:
+      - index: 0
+        operator: "NotDAddr"
+        values:
+        - 127.0.0.1
+        - 192.168.0.0/16	# pod CIDR
+        - 172.20.0.0/16	# services CIDR
+      matchActions:
+      - action: Sigkill

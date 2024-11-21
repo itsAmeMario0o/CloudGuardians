@@ -1,0 +1,18 @@
+Get Workload Agent on bastion host
+
+scp -i /path/to/your-key.pem /path/to/local-file ec2-user@ec2-instance-address:/home/ec2-user
+
+Your private key file is located at /path/to/your-key.pem.
+The file you want to copy is located at /path/to/local-file on your desktop.
+Your EC2 instance's public DNS is ec2-instance-address.
+Your EC2 username is ec2-user.
+You want to copy the file to the /home/ec2-user directory on the EC2 instance.
+
+Transfer file:
+scp -i ../../1-EKS/private-key/eks-lab-key.pem tetration_installer_rooez_enforcer_kubernetes_tet-pov-rtp1.sh ec2-user@35.175.114.171:/tmp/tetration_installer_rooez_enforcer_kubernetes_tet-pov-rtp1.sh
+
+
+THIS IS RUN ON ANY MACHINE, LIKE YOUR LAPTOP, THAT HAS KUBECTL ACCESS TO CLUSTER
+
+bash tetration_installer_rooez_enforcer_kubernetes_tet-pov-rtp1.sh
+

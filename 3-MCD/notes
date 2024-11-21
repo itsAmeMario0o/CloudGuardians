@@ -1,0 +1,48 @@
+Allow CSW to read S3 bucket
+
+In an effort to centralize VPC Flow logs, we can use the bucket created by MCD and direct all flow logs to this bucket.
+
+1 - Enable DNS Log Discovery
+The VPCs that are monitored for the DNS query logs must be added manually.
+
+- On AWS Console go to the Route53 Query Logging
+Select the Query Logger created by the template (Look for the logger with the Prefix name provided in the template)
+
+- Select and add all the VPCs for which you want to get the traffic insights
+
+- Click Log queries for VPCs or Add VPC under the VPCs that queries are logged for section
+
+Select all the VPCs and click Choose
+
+
+2 - Enable VPC Flow Logs
+
+- Go to the VPCs section on the AWS Console
+
+Select the VPC and select the Flow Logs tab for that VPC
+
+Select All as the Filter
+- Select Send to an Amazon S3 bucket as the Destination
+
+Provide the MCD S3 Bucket ARN
+
+- Choose Custom Format as the Log Record Format
+Select all the fields from the Log Format dropdown
+
+Click Create Flow Log
+
+3 - Update the Bucket Policy to add the user.
+
+When to Use a Bucket Policy (Preferred for Multiple Users/Roles)
+
+Multiple Users or Roles: If several users or roles need access to the bucket, it's generally better to centralize access control in the bucket policy. This allows for consistent permissions and easier maintenance.
+
+Single Source of Truth: A bucket policy is a centralized way to manage access to the bucket itself, making it clearer which entities have access and simplifying auditing.
+
+Delegated Management: For buckets used by different teams, managing access through the bucket policy can facilitate a clear separation of permissions.
+
+External Accounts: If any users from another AWS account need access, bucket policies are the only way to grant cross-account permissions without involving the other account’s IAM policies.
+
+Update the bucket policy parameters in the 'update-bucket-policy.json'
+Replace ACCOUNT_ID and USER_NAME with the IAM user's account ID and username.
+Replace your-bucket-name with the actual bucket name.

@@ -1,0 +1,6 @@
+# Replace with the correct ARNs for the EKS node and CSW IAM user
+apiVersion: v1
+data:
+  mapUsers: |
+    - userarn: arn:aws:iam::361769557864:user/ciscoworkload-user
+      username: ciscoworkload-user

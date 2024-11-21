@@ -1,0 +1,16 @@
+,
+{
+  "Sid": "AllowSecureWorkloadRead",
+  "Principal": {
+      "AWS": "arn:aws:iam::361769557864:user/ciscoworkload-user"
+  },
+  "Effect": "Allow",
+  "Action": [
+      "s3:GetObject",
+            "s3:ListBucket"
+                ],
+        "Resource": [
+              "arn:aws:s3:::ciscomcd-cdo-cisco-mariorui-241114-005016",
+              "arn:aws:s3:::ciscomcd-cdo-cisco-mariorui-241114-005016/*"
+              ]
+}

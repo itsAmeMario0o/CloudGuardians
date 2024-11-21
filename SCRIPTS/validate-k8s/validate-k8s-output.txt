@@ -1,0 +1,1225 @@
+Running: kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://25E887BD6181F7A8B822F14747AF241C.gr7.us-east-1.eks.amazonaws.com
+  name: arn:aws:eks:us-east-1:361769557864:cluster/cisco-test-ekslab
+contexts:
+- context:
+    cluster: arn:aws:eks:us-east-1:361769557864:cluster/cisco-test-ekslab
+    user: arn:aws:eks:us-east-1:361769557864:cluster/cisco-test-ekslab
+  name: arn:aws:eks:us-east-1:361769557864:cluster/cisco-test-ekslab
+current-context: arn:aws:eks:us-east-1:361769557864:cluster/cisco-test-ekslab
+kind: Config
+preferences: {}
+users:
+- name: arn:aws:eks:us-east-1:361769557864:cluster/cisco-test-ekslab
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - --region
+      - us-east-1
+      - eks
+      - get-token
+      - --cluster-name
+      - cisco-test-ekslab
+      - --output
+      - json
+      command: aws
+      env: null
+      interactiveMode: IfAvailable
+      provideClusterInfo: false
+
+Running: kubectl config current-context
+arn:aws:eks:us-east-1:361769557864:cluster/cisco-test-ekslab
+
+Running: kubectl get --raw='/healthz'
+ok
+Running: kubectl get nodes -o wide
+NAME                         STATUS   ROLES    AGE   VERSION                INTERNAL-IP   EXTERNAL-IP      OS-IMAGE         KERNEL-VERSION                  CONTAINER-RUNTIME
+ip-10-0-1-244.ec2.internal   Ready    <none>   54m   v1.27.16-eks-a737599   10.0.1.244    54.209.64.84     Amazon Linux 2   5.10.227-219.884.amzn2.x86_64   containerd://1.7.22
+ip-10-0-2-126.ec2.internal   Ready    <none>   54m   v1.27.16-eks-a737599   10.0.2.126    107.22.137.225   Amazon Linux 2   5.10.227-219.884.amzn2.x86_64   containerd://1.7.22
+
+Running: kubectl describe node ip-10-0-1-244.ec2.internal
+Name:               ip-10-0-1-244.ec2.internal
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=t3.medium
+                    beta.kubernetes.io/os=linux
+                    eks.amazonaws.com/capacityType=ON_DEMAND
+                    eks.amazonaws.com/nodegroup=cisco-test-eks-ng-public
+                    eks.amazonaws.com/nodegroup-image=ami-04463ab808e50d095
+                    failure-domain.beta.kubernetes.io/region=us-east-1
+                    failure-domain.beta.kubernetes.io/zone=us-east-1a
+                    k8s.io/cloud-provider-aws=1056d26e9820e1f3a5003899959a8169
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=ip-10-0-1-244.ec2.internal
+                    kubernetes.io/os=linux
+                    node.kubernetes.io/instance-type=t3.medium
+                    topology.kubernetes.io/region=us-east-1
+                    topology.kubernetes.io/zone=us-east-1a
+Annotations:        alpha.kubernetes.io/provided-node-ip: 10.0.1.244
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Mon, 11 Nov 2024 21:01:39 -0500
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  ip-10-0-1-244.ec2.internal
+  AcquireTime:     <unset>
+  RenewTime:       Mon, 11 Nov 2024 21:55:44 -0500
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Mon, 11 Nov 2024 21:53:13 -0500   Mon, 11 Nov 2024 21:01:38 -0500   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Mon, 11 Nov 2024 21:53:13 -0500   Mon, 11 Nov 2024 21:01:38 -0500   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Mon, 11 Nov 2024 21:53:13 -0500   Mon, 11 Nov 2024 21:01:38 -0500   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Mon, 11 Nov 2024 21:53:13 -0500   Mon, 11 Nov 2024 21:01:51 -0500   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:   10.0.1.244
+  ExternalIP:   54.209.64.84
+  InternalDNS:  ip-10-0-1-244.ec2.internal
+  Hostname:     ip-10-0-1-244.ec2.internal
+  ExternalDNS:  ec2-54-209-64-84.compute-1.amazonaws.com
+Capacity:
+  cpu:                2
+  ephemeral-storage:  20959212Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             3943300Ki
+  pods:               17
+Allocatable:
+  cpu:                1930m
+  ephemeral-storage:  18242267924
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             3388292Ki
+  pods:               17
+System Info:
+  Machine ID:                 ec26bf1f727e7911caf4ac38e508dddb
+  System UUID:                ec26bf1f-727e-7911-caf4-ac38e508dddb
+  Boot ID:                    9177b4ce-1fb4-4a09-8f10-f5fb94949d86
+  Kernel Version:             5.10.227-219.884.amzn2.x86_64
+  OS Image:                   Amazon Linux 2
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.7.22
+  Kubelet Version:            v1.27.16-eks-a737599
+  Kube-Proxy Version:         v1.27.16-eks-a737599
+ProviderID:                   aws:///us-east-1a/i-03e25168cdde2b8dc
+Non-terminated Pods:          (4 in total)
+  Namespace                   Name                       CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                       ------------  ----------  ---------------  -------------  ---
+  kube-system                 aws-node-gh66p             50m (2%)      0 (0%)      0 (0%)           0 (0%)         54m
+  kube-system                 coredns-d9b6d6c7d-5wbn6    100m (5%)     0 (0%)      70Mi (2%)        170Mi (5%)     56m
+  kube-system                 coredns-d9b6d6c7d-sz7th    100m (5%)     0 (0%)      70Mi (2%)        170Mi (5%)     56m
+  kube-system                 kube-proxy-tl5xb           100m (5%)     0 (0%)      0 (0%)           0 (0%)         54m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                350m (18%)  0 (0%)
+  memory             140Mi (4%)  340Mi (10%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-1Gi      0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:
+  Type     Reason                   Age                From                   Message
+  ----     ------                   ----               ----                   -------
+  Normal   Starting                 54m                kube-proxy             
+  Normal   Starting                 54m                kubelet                Starting kubelet.
+  Warning  InvalidDiskCapacity      54m                kubelet                invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  54m (x2 over 54m)  kubelet                Node ip-10-0-1-244.ec2.internal status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    54m (x2 over 54m)  kubelet                Node ip-10-0-1-244.ec2.internal status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     54m (x2 over 54m)  kubelet                Node ip-10-0-1-244.ec2.internal status is now: NodeHasSufficientPID
+  Normal   NodeAllocatableEnforced  54m                kubelet                Updated Node Allocatable limit across pods
+  Normal   RegisteredNode           54m                node-controller        Node ip-10-0-1-244.ec2.internal event: Registered Node ip-10-0-1-244.ec2.internal in Controller
+  Normal   Synced                   54m                cloud-node-controller  Node synced successfully
+  Normal   NodeReady                53m                kubelet                Node ip-10-0-1-244.ec2.internal status is now: NodeReady
+
+Running: kubectl describe node ip-10-0-2-126.ec2.internal
+Name:               ip-10-0-2-126.ec2.internal
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=t3.medium
+                    beta.kubernetes.io/os=linux
+                    eks.amazonaws.com/capacityType=ON_DEMAND
+                    eks.amazonaws.com/nodegroup=cisco-test-eks-ng-public
+                    eks.amazonaws.com/nodegroup-image=ami-04463ab808e50d095
+                    failure-domain.beta.kubernetes.io/region=us-east-1
+                    failure-domain.beta.kubernetes.io/zone=us-east-1b
+                    k8s.io/cloud-provider-aws=1056d26e9820e1f3a5003899959a8169
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=ip-10-0-2-126.ec2.internal
+                    kubernetes.io/os=linux
+                    node.kubernetes.io/instance-type=t3.medium
+                    topology.kubernetes.io/region=us-east-1
+                    topology.kubernetes.io/zone=us-east-1b
+Annotations:        alpha.kubernetes.io/provided-node-ip: 10.0.2.126
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Mon, 11 Nov 2024 21:01:45 -0500
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  ip-10-0-2-126.ec2.internal
+  AcquireTime:     <unset>
+  RenewTime:       Mon, 11 Nov 2024 21:55:43 -0500
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Mon, 11 Nov 2024 21:53:17 -0500   Mon, 11 Nov 2024 21:01:44 -0500   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Mon, 11 Nov 2024 21:53:17 -0500   Mon, 11 Nov 2024 21:01:44 -0500   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Mon, 11 Nov 2024 21:53:17 -0500   Mon, 11 Nov 2024 21:01:44 -0500   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Mon, 11 Nov 2024 21:53:17 -0500   Mon, 11 Nov 2024 21:01:57 -0500   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:   10.0.2.126
+  ExternalIP:   107.22.137.225
+  InternalDNS:  ip-10-0-2-126.ec2.internal
+  Hostname:     ip-10-0-2-126.ec2.internal
+  ExternalDNS:  ec2-107-22-137-225.compute-1.amazonaws.com
+Capacity:
+  cpu:                2
+  ephemeral-storage:  20959212Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             3943300Ki
+  pods:               17
+Allocatable:
+  cpu:                1930m
+  ephemeral-storage:  18242267924
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             3388292Ki
+  pods:               17
+System Info:
+  Machine ID:                 ec256eb3848c4af67be52fe2bf9fec23
+  System UUID:                ec256eb3-848c-4af6-7be5-2fe2bf9fec23
+  Boot ID:                    81d75744-a6ab-473a-bb84-40e0c19dfaf9
+  Kernel Version:             5.10.227-219.884.amzn2.x86_64
+  OS Image:                   Amazon Linux 2
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.7.22
+  Kubelet Version:            v1.27.16-eks-a737599
+  Kube-Proxy Version:         v1.27.16-eks-a737599
+ProviderID:                   aws:///us-east-1b/i-0284cac846c9700bc
+Non-terminated Pods:          (2 in total)
+  Namespace                   Name                CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                ------------  ----------  ---------------  -------------  ---
+  kube-system                 aws-node-gvjzk      50m (2%)      0 (0%)      0 (0%)           0 (0%)         54m
+  kube-system                 kube-proxy-77lnx    100m (5%)     0 (0%)      0 (0%)           0 (0%)         54m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests   Limits
+  --------           --------   ------
+  cpu                150m (7%)  0 (0%)
+  memory             0 (0%)     0 (0%)
+  ephemeral-storage  0 (0%)     0 (0%)
+  hugepages-1Gi      0 (0%)     0 (0%)
+  hugepages-2Mi      0 (0%)     0 (0%)
+Events:
+  Type     Reason                   Age                From                   Message
+  ----     ------                   ----               ----                   -------
+  Normal   Starting                 53m                kube-proxy             
+  Normal   Starting                 54m                kubelet                Starting kubelet.
+  Warning  InvalidDiskCapacity      54m                kubelet                invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  54m (x2 over 54m)  kubelet                Node ip-10-0-2-126.ec2.internal status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    54m (x2 over 54m)  kubelet                Node ip-10-0-2-126.ec2.internal status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     54m (x2 over 54m)  kubelet                Node ip-10-0-2-126.ec2.internal status is now: NodeHasSufficientPID
+  Normal   NodeAllocatableEnforced  54m                kubelet                Updated Node Allocatable limit across pods
+  Normal   Synced                   54m                cloud-node-controller  Node synced successfully
+  Normal   RegisteredNode           53m                node-controller        Node ip-10-0-2-126.ec2.internal event: Registered Node ip-10-0-2-126.ec2.internal in Controller
+  Normal   NodeReady                53m                kubelet                Node ip-10-0-2-126.ec2.internal status is now: NodeReady
+
+Running: kubectl get pods -n kube-system -o wide
+NAME                      READY   STATUS    RESTARTS   AGE   IP           NODE                         NOMINATED NODE   READINESS GATES
+aws-node-gh66p            2/2     Running   0          54m   10.0.1.244   ip-10-0-1-244.ec2.internal   <none>           <none>
+aws-node-gvjzk            2/2     Running   0          54m   10.0.2.126   ip-10-0-2-126.ec2.internal   <none>           <none>
+coredns-d9b6d6c7d-5wbn6   1/1     Running   0          56m   10.0.1.100   ip-10-0-1-244.ec2.internal   <none>           <none>
+coredns-d9b6d6c7d-sz7th   1/1     Running   0          56m   10.0.1.198   ip-10-0-1-244.ec2.internal   <none>           <none>
+kube-proxy-77lnx          1/1     Running   0          54m   10.0.2.126   ip-10-0-2-126.ec2.internal   <none>           <none>
+kube-proxy-tl5xb          1/1     Running   0          54m   10.0.1.244   ip-10-0-1-244.ec2.internal   <none>           <none>
+
+Running: kubectl describe pod aws-node-gh66p -n kube-system
+Name:                 aws-node-gh66p
+Namespace:            kube-system
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Service Account:      aws-node
+Node:                 ip-10-0-1-244.ec2.internal/10.0.1.244
+Start Time:           Mon, 11 Nov 2024 21:01:40 -0500
+Labels:               app.kubernetes.io/instance=aws-vpc-cni
+                      app.kubernetes.io/name=aws-node
+                      controller-revision-hash=66dd89f4f7
+                      k8s-app=aws-node
+                      pod-template-generation=1
+Annotations:          <none>
+Status:               Running
+IP:                   10.0.1.244
+IPs:
+  IP:           10.0.1.244
+Controlled By:  DaemonSet/aws-node
+Init Containers:
+  aws-vpc-cni-init:
+    Container ID:   containerd://97205b092a087d334d326841913bd0a4f61fdc67441fe1fb328c48684e061343
+    Image:          602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon-k8s-cni-init:v1.15.1-eksbuild.1
+    Image ID:       sha256:c61ffc0bcf43b8320c5e4c6861416fb5436ce87f33727a28f1ee47a512490c72
+    Port:           <none>
+    Host Port:      <none>
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 11 Nov 2024 21:01:45 -0500
+      Finished:     Mon, 11 Nov 2024 21:01:45 -0500
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:  25m
+    Environment:
+      DISABLE_TCP_EARLY_DEMUX:  false
+      ENABLE_IPv6:              false
+    Mounts:
+      /host/opt/cni/bin from cni-bin-dir (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-m878q (ro)
+Containers:
+  aws-node:
+    Container ID:   containerd://926d0b0cd942fd9a2c97eb3d6a6412dfe8c489b816d264fd583c64fe1e5d6e9a
+    Image:          602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon-k8s-cni:v1.15.1-eksbuild.1
+    Image ID:       sha256:6129a72c120c1dc822e465bebf6e0cd6d1446011b64bdba5c9c4a778d17b43d0
+    Port:           61678/TCP
+    Host Port:      61678/TCP
+    State:          Running
+      Started:      Mon, 11 Nov 2024 21:01:49 -0500
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:      25m
+    Liveness:   exec [/app/grpc-health-probe -addr=:50051 -connect-timeout=5s -rpc-timeout=5s] delay=60s timeout=10s period=10s #success=1 #failure=3
+    Readiness:  exec [/app/grpc-health-probe -addr=:50051 -connect-timeout=5s -rpc-timeout=5s] delay=1s timeout=10s period=10s #success=1 #failure=3
+    Environment:
+      ADDITIONAL_ENI_TAGS:                    {}
+      ANNOTATE_POD_IP:                        false
+      AWS_VPC_CNI_NODE_PORT_SUPPORT:          true
+      AWS_VPC_ENI_MTU:                        9001
+      AWS_VPC_K8S_CNI_CUSTOM_NETWORK_CFG:     false
+      AWS_VPC_K8S_CNI_EXTERNALSNAT:           false
+      AWS_VPC_K8S_CNI_LOGLEVEL:               DEBUG
+      AWS_VPC_K8S_CNI_LOG_FILE:               /host/var/log/aws-routed-eni/ipamd.log
+      AWS_VPC_K8S_CNI_RANDOMIZESNAT:          prng
+      AWS_VPC_K8S_CNI_VETHPREFIX:             eni
+      AWS_VPC_K8S_PLUGIN_LOG_FILE:            /var/log/aws-routed-eni/plugin.log
+      AWS_VPC_K8S_PLUGIN_LOG_LEVEL:           DEBUG
+      CLUSTER_NAME:                           cisco-test-ekslab
+      DISABLE_INTROSPECTION:                  false
+      DISABLE_METRICS:                        false
+      DISABLE_NETWORK_RESOURCE_PROVISIONING:  false
+      ENABLE_IPv4:                            true
+      ENABLE_IPv6:                            false
+      ENABLE_POD_ENI:                         false
+      ENABLE_PREFIX_DELEGATION:               false
+      VPC_CNI_VERSION:                        v1.15.1
+      VPC_ID:                                 vpc-0d7645592402200e8
+      WARM_ENI_TARGET:                        1
+      WARM_PREFIX_TARGET:                     1
+      MY_NODE_NAME:                            (v1:spec.nodeName)
+      MY_POD_NAME:                            aws-node-gh66p (v1:metadata.name)
+    Mounts:
+      /host/etc/cni/net.d from cni-net-dir (rw)
+      /host/opt/cni/bin from cni-bin-dir (rw)
+      /host/var/log/aws-routed-eni from log-dir (rw)
+      /run/xtables.lock from xtables-lock (rw)
+      /var/run/aws-node from run-dir (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-m878q (ro)
+  aws-eks-nodeagent:
+    Container ID:  containerd://6aaf0735ac6838c7a52c1e95f7dbc779e0bf19733dcbbe4e7081e2258cb11de5
+    Image:         602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-network-policy-agent:v1.0.4-eksbuild.1
+    Image ID:      602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-network-policy-agent@sha256:80657a95ac77443c150763ea5432889944073f0390f9213239d58891b82d0ea2
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --enable-ipv6=false
+      --enable-network-policy=false
+      --enable-cloudwatch-logs=false
+      --enable-policy-event-logs=false
+      --metrics-bind-addr=:8162
+      --health-probe-bind-addr=:8163
+    State:          Running
+      Started:      Mon, 11 Nov 2024 21:02:07 -0500
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:  25m
+    Environment:
+      MY_NODE_NAME:   (v1:spec.nodeName)
+    Mounts:
+      /host/opt/cni/bin from cni-bin-dir (rw)
+      /sys/fs/bpf from bpf-pin-path (rw)
+      /var/log/aws-routed-eni from log-dir (rw)
+      /var/run/aws-node from run-dir (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-m878q (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  bpf-pin-path:
+    Type:          HostPath (bare host directory volume)
+    Path:          /sys/fs/bpf
+    HostPathType:  
+  cni-bin-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /opt/cni/bin
+    HostPathType:  
+  cni-net-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/cni/net.d
+    HostPathType:  
+  log-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/log/aws-routed-eni
+    HostPathType:  DirectoryOrCreate
+  run-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/run/aws-node
+    HostPathType:  DirectoryOrCreate
+  xtables-lock:
+    Type:          HostPath (bare host directory volume)
+    Path:          /run/xtables.lock
+    HostPathType:  
+  kube-api-access-m878q:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 op=Exists
+                             node.kubernetes.io/disk-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/network-unavailable:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists
+                             node.kubernetes.io/pid-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/unreachable:NoExecute op=Exists
+                             node.kubernetes.io/unschedulable:NoSchedule op=Exists
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  54m   default-scheduler  Successfully assigned kube-system/aws-node-gh66p to ip-10-0-1-244.ec2.internal
+  Normal  Pulled     54m   kubelet            Container image "602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon-k8s-cni-init:v1.15.1-eksbuild.1" already present on machine
+  Normal  Created    54m   kubelet            Created container aws-vpc-cni-init
+  Normal  Started    54m   kubelet            Started container aws-vpc-cni-init
+  Normal  Pulled     54m   kubelet            Container image "602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon-k8s-cni:v1.15.1-eksbuild.1" already present on machine
+  Normal  Created    54m   kubelet            Created container aws-node
+  Normal  Started    54m   kubelet            Started container aws-node
+  Normal  Pulling    54m   kubelet            Pulling image "602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-network-policy-agent:v1.0.4-eksbuild.1"
+  Normal  Pulled     53m   kubelet            Successfully pulled image "602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-network-policy-agent:v1.0.4-eksbuild.1" in 18.144969855s (18.144983743s including waiting)
+  Normal  Created    53m   kubelet            Created container aws-eks-nodeagent
+  Normal  Started    53m   kubelet            Started container aws-eks-nodeagent
+
+Running: kubectl logs aws-node-gh66p -n kube-system
+Defaulted container "aws-node" out of: aws-node, aws-eks-nodeagent, aws-vpc-cni-init (init)
+Installed /host/opt/cni/bin/aws-cni
+Installed /host/opt/cni/bin/egress-cni
+time="2024-11-12T02:01:49Z" level=info msg="Starting IPAM daemon... "
+time="2024-11-12T02:01:49Z" level=info msg="Checking for IPAM connectivity... "
+time="2024-11-12T02:01:51Z" level=info msg="Copying config file... "
+time="2024-11-12T02:01:51Z" level=info msg="Successfully copied CNI plugin binary and config file."
+
+Running: kubectl describe pod aws-node-gvjzk -n kube-system
+Name:                 aws-node-gvjzk
+Namespace:            kube-system
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Service Account:      aws-node
+Node:                 ip-10-0-2-126.ec2.internal/10.0.2.126
+Start Time:           Mon, 11 Nov 2024 21:01:46 -0500
+Labels:               app.kubernetes.io/instance=aws-vpc-cni
+                      app.kubernetes.io/name=aws-node
+                      controller-revision-hash=66dd89f4f7
+                      k8s-app=aws-node
+                      pod-template-generation=1
+Annotations:          <none>
+Status:               Running
+IP:                   10.0.2.126
+IPs:
+  IP:           10.0.2.126
+Controlled By:  DaemonSet/aws-node
+Init Containers:
+  aws-vpc-cni-init:
+    Container ID:   containerd://9805a5c3305b8dc599ac7e0fae1bdd5a8996af4ed2645c44e3355555bce44fff
+    Image:          602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon-k8s-cni-init:v1.15.1-eksbuild.1
+    Image ID:       sha256:c61ffc0bcf43b8320c5e4c6861416fb5436ce87f33727a28f1ee47a512490c72
+    Port:           <none>
+    Host Port:      <none>
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 11 Nov 2024 21:01:50 -0500
+      Finished:     Mon, 11 Nov 2024 21:01:50 -0500
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:  25m
+    Environment:
+      DISABLE_TCP_EARLY_DEMUX:  false
+      ENABLE_IPv6:              false
+    Mounts:
+      /host/opt/cni/bin from cni-bin-dir (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9f2sh (ro)
+Containers:
+  aws-node:
+    Container ID:   containerd://fb380ecdfa79386a0683c2a3bdffda0993084e1590ba864d5128cf0411a63545
+    Image:          602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon-k8s-cni:v1.15.1-eksbuild.1
+    Image ID:       sha256:6129a72c120c1dc822e465bebf6e0cd6d1446011b64bdba5c9c4a778d17b43d0
+    Port:           61678/TCP
+    Host Port:      61678/TCP
+    State:          Running
+      Started:      Mon, 11 Nov 2024 21:01:54 -0500
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:      25m
+    Liveness:   exec [/app/grpc-health-probe -addr=:50051 -connect-timeout=5s -rpc-timeout=5s] delay=60s timeout=10s period=10s #success=1 #failure=3
+    Readiness:  exec [/app/grpc-health-probe -addr=:50051 -connect-timeout=5s -rpc-timeout=5s] delay=1s timeout=10s period=10s #success=1 #failure=3
+    Environment:
+      ADDITIONAL_ENI_TAGS:                    {}
+      ANNOTATE_POD_IP:                        false
+      AWS_VPC_CNI_NODE_PORT_SUPPORT:          true
+      AWS_VPC_ENI_MTU:                        9001
+      AWS_VPC_K8S_CNI_CUSTOM_NETWORK_CFG:     false
+      AWS_VPC_K8S_CNI_EXTERNALSNAT:           false
+      AWS_VPC_K8S_CNI_LOGLEVEL:               DEBUG
+      AWS_VPC_K8S_CNI_LOG_FILE:               /host/var/log/aws-routed-eni/ipamd.log
+      AWS_VPC_K8S_CNI_RANDOMIZESNAT:          prng
+      AWS_VPC_K8S_CNI_VETHPREFIX:             eni
+      AWS_VPC_K8S_PLUGIN_LOG_FILE:            /var/log/aws-routed-eni/plugin.log
+      AWS_VPC_K8S_PLUGIN_LOG_LEVEL:           DEBUG
+      CLUSTER_NAME:                           cisco-test-ekslab
+      DISABLE_INTROSPECTION:                  false
+      DISABLE_METRICS:                        false
+      DISABLE_NETWORK_RESOURCE_PROVISIONING:  false
+      ENABLE_IPv4:                            true
+      ENABLE_IPv6:                            false
+      ENABLE_POD_ENI:                         false
+      ENABLE_PREFIX_DELEGATION:               false
+      VPC_CNI_VERSION:                        v1.15.1
+      VPC_ID:                                 vpc-0d7645592402200e8
+      WARM_ENI_TARGET:                        1
+      WARM_PREFIX_TARGET:                     1
+      MY_NODE_NAME:                            (v1:spec.nodeName)
+      MY_POD_NAME:                            aws-node-gvjzk (v1:metadata.name)
+    Mounts:
+      /host/etc/cni/net.d from cni-net-dir (rw)
+      /host/opt/cni/bin from cni-bin-dir (rw)
+      /host/var/log/aws-routed-eni from log-dir (rw)
+      /run/xtables.lock from xtables-lock (rw)
+      /var/run/aws-node from run-dir (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9f2sh (ro)
+  aws-eks-nodeagent:
+    Container ID:  containerd://eb07e2a6e1ddb39a221c3832361e9ee2c6b4fdf1567540aa3cf509866edd3a6c
+    Image:         602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-network-policy-agent:v1.0.4-eksbuild.1
+    Image ID:      602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-network-policy-agent@sha256:80657a95ac77443c150763ea5432889944073f0390f9213239d58891b82d0ea2
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --enable-ipv6=false
+      --enable-network-policy=false
+      --enable-cloudwatch-logs=false
+      --enable-policy-event-logs=false
+      --metrics-bind-addr=:8162
+      --health-probe-bind-addr=:8163
+    State:          Running
+      Started:      Mon, 11 Nov 2024 21:02:12 -0500
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:  25m
+    Environment:
+      MY_NODE_NAME:   (v1:spec.nodeName)
+    Mounts:
+      /host/opt/cni/bin from cni-bin-dir (rw)
+      /sys/fs/bpf from bpf-pin-path (rw)
+      /var/log/aws-routed-eni from log-dir (rw)
+      /var/run/aws-node from run-dir (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9f2sh (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  bpf-pin-path:
+    Type:          HostPath (bare host directory volume)
+    Path:          /sys/fs/bpf
+    HostPathType:  
+  cni-bin-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /opt/cni/bin
+    HostPathType:  
+  cni-net-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/cni/net.d
+    HostPathType:  
+  log-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/log/aws-routed-eni
+    HostPathType:  DirectoryOrCreate
+  run-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/run/aws-node
+    HostPathType:  DirectoryOrCreate
+  xtables-lock:
+    Type:          HostPath (bare host directory volume)
+    Path:          /run/xtables.lock
+    HostPathType:  
+  kube-api-access-9f2sh:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 op=Exists
+                             node.kubernetes.io/disk-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/network-unavailable:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists
+                             node.kubernetes.io/pid-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/unreachable:NoExecute op=Exists
+                             node.kubernetes.io/unschedulable:NoSchedule op=Exists
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  54m   default-scheduler  Successfully assigned kube-system/aws-node-gvjzk to ip-10-0-2-126.ec2.internal
+  Normal  Pulled     54m   kubelet            Container image "602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon-k8s-cni-init:v1.15.1-eksbuild.1" already present on machine
+  Normal  Created    54m   kubelet            Created container aws-vpc-cni-init
+  Normal  Started    54m   kubelet            Started container aws-vpc-cni-init
+  Normal  Pulled     54m   kubelet            Container image "602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon-k8s-cni:v1.15.1-eksbuild.1" already present on machine
+  Normal  Created    53m   kubelet            Created container aws-node
+  Normal  Started    53m   kubelet            Started container aws-node
+  Normal  Pulling    53m   kubelet            Pulling image "602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-network-policy-agent:v1.0.4-eksbuild.1"
+  Normal  Pulled     53m   kubelet            Successfully pulled image "602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-network-policy-agent:v1.0.4-eksbuild.1" in 17.692818278s (17.692829996s including waiting)
+  Normal  Created    53m   kubelet            Created container aws-eks-nodeagent
+  Normal  Started    53m   kubelet            Started container aws-eks-nodeagent
+
+Running: kubectl logs aws-node-gvjzk -n kube-system
+Defaulted container "aws-node" out of: aws-node, aws-eks-nodeagent, aws-vpc-cni-init (init)
+Installed /host/opt/cni/bin/aws-cni
+Installed /host/opt/cni/bin/egress-cni
+time="2024-11-12T02:01:55Z" level=info msg="Starting IPAM daemon... "
+time="2024-11-12T02:01:55Z" level=info msg="Checking for IPAM connectivity... "
+time="2024-11-12T02:01:57Z" level=info msg="Copying config file... "
+time="2024-11-12T02:01:57Z" level=info msg="Successfully copied CNI plugin binary and config file."
+
+Running: kubectl describe pod coredns-d9b6d6c7d-5wbn6 -n kube-system
+Name:                 coredns-d9b6d6c7d-5wbn6
+Namespace:            kube-system
+Priority:             2000000000
+Priority Class Name:  system-cluster-critical
+Service Account:      coredns
+Node:                 ip-10-0-1-244.ec2.internal/10.0.1.244
+Start Time:           Mon, 11 Nov 2024 21:01:51 -0500
+Labels:               eks.amazonaws.com/component=coredns
+                      k8s-app=kube-dns
+                      pod-template-hash=d9b6d6c7d
+Annotations:          <none>
+Status:               Running
+IP:                   10.0.1.100
+IPs:
+  IP:           10.0.1.100
+Controlled By:  ReplicaSet/coredns-d9b6d6c7d
+Containers:
+  coredns:
+    Container ID:  containerd://ca4ee597ab99ace69a4ac0255212099418b1404285ac156fd8f853ddb9578ad0
+    Image:         602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns:v1.10.1-eksbuild.4
+    Image ID:      602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns@sha256:5c28d83aa83695cc0edde09aae3990526a3e86d9b86ba6ab6bf039ca550a0393
+    Ports:         53/UDP, 53/TCP, 9153/TCP
+    Host Ports:    0/UDP, 0/TCP, 0/TCP
+    Args:
+      -conf
+      /etc/coredns/Corefile
+    State:          Running
+      Started:      Mon, 11 Nov 2024 21:01:54 -0500
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  170Mi
+    Requests:
+      cpu:        100m
+      memory:     70Mi
+    Liveness:     http-get http://:8080/health delay=60s timeout=5s period=10s #success=1 #failure=5
+    Readiness:    http-get http://:8181/ready delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /etc/coredns from config-volume (ro)
+      /tmp from tmp (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jmwrr (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  tmp:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  config-volume:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      coredns
+    Optional:  false
+  kube-api-access-jmwrr:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 CriticalAddonsOnly op=Exists
+                             node-role.kubernetes.io/master:NoSchedule
+                             node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  56m   default-scheduler  no nodes available to schedule pods
+  Warning  FailedScheduling  54m   default-scheduler  0/1 nodes are available: 1 node(s) had untolerated taint {node.cloudprovider.kubernetes.io/uninitialized: true}. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling..
+  Normal   Scheduled         54m   default-scheduler  Successfully assigned kube-system/coredns-d9b6d6c7d-5wbn6 to ip-10-0-1-244.ec2.internal
+  Normal   Pulling           54m   kubelet            Pulling image "602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns:v1.10.1-eksbuild.4"
+  Normal   Pulled            54m   kubelet            Successfully pulled image "602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns:v1.10.1-eksbuild.4" in 2.38077071s (2.380785485s including waiting)
+  Normal   Created           54m   kubelet            Created container coredns
+  Normal   Started           54m   kubelet            Started container coredns
+
+Running: kubectl logs coredns-d9b6d6c7d-5wbn6 -n kube-system
+.:53
+[INFO] plugin/reload: Running configuration SHA512 = 8a7d59126e7f114ab49c6d2613be93d8ef7d408af8ee61a710210843dc409f03133727e38f64469d9bb180f396c84ebf48a42bde3b3769730865ca9df5eb281c
+CoreDNS-1.10.1
+linux/amd64, go1.20.4, 84446ec6
+
+Running: kubectl describe pod coredns-d9b6d6c7d-sz7th -n kube-system
+Name:                 coredns-d9b6d6c7d-sz7th
+Namespace:            kube-system
+Priority:             2000000000
+Priority Class Name:  system-cluster-critical
+Service Account:      coredns
+Node:                 ip-10-0-1-244.ec2.internal/10.0.1.244
+Start Time:           Mon, 11 Nov 2024 21:01:51 -0500
+Labels:               eks.amazonaws.com/component=coredns
+                      k8s-app=kube-dns
+                      pod-template-hash=d9b6d6c7d
+Annotations:          <none>
+Status:               Running
+IP:                   10.0.1.198
+IPs:
+  IP:           10.0.1.198
+Controlled By:  ReplicaSet/coredns-d9b6d6c7d
+Containers:
+  coredns:
+    Container ID:  containerd://92adcffc102233b220e675af1d66fd42d8382f9363e02b615d438cb2603fa1b6
+    Image:         602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns:v1.10.1-eksbuild.4
+    Image ID:      602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns@sha256:5c28d83aa83695cc0edde09aae3990526a3e86d9b86ba6ab6bf039ca550a0393
+    Ports:         53/UDP, 53/TCP, 9153/TCP
+    Host Ports:    0/UDP, 0/TCP, 0/TCP
+    Args:
+      -conf
+      /etc/coredns/Corefile
+    State:          Running
+      Started:      Mon, 11 Nov 2024 21:01:54 -0500
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  170Mi
+    Requests:
+      cpu:        100m
+      memory:     70Mi
+    Liveness:     http-get http://:8080/health delay=60s timeout=5s period=10s #success=1 #failure=5
+    Readiness:    http-get http://:8181/ready delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /etc/coredns from config-volume (ro)
+      /tmp from tmp (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jgpvx (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  tmp:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  config-volume:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      coredns
+    Optional:  false
+  kube-api-access-jgpvx:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 CriticalAddonsOnly op=Exists
+                             node-role.kubernetes.io/master:NoSchedule
+                             node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  56m   default-scheduler  no nodes available to schedule pods
+  Warning  FailedScheduling  54m   default-scheduler  0/1 nodes are available: 1 node(s) had untolerated taint {node.cloudprovider.kubernetes.io/uninitialized: true}. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling..
+  Normal   Scheduled         54m   default-scheduler  Successfully assigned kube-system/coredns-d9b6d6c7d-sz7th to ip-10-0-1-244.ec2.internal
+  Normal   Pulling           54m   kubelet            Pulling image "602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns:v1.10.1-eksbuild.4"
+  Normal   Pulled            54m   kubelet            Successfully pulled image "602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/coredns:v1.10.1-eksbuild.4" in 2.3741987s (2.374205947s including waiting)
+  Normal   Created           54m   kubelet            Created container coredns
+  Normal   Started           54m   kubelet            Started container coredns
+
+Running: kubectl logs coredns-d9b6d6c7d-sz7th -n kube-system
+.:53
+[INFO] plugin/reload: Running configuration SHA512 = 8a7d59126e7f114ab49c6d2613be93d8ef7d408af8ee61a710210843dc409f03133727e38f64469d9bb180f396c84ebf48a42bde3b3769730865ca9df5eb281c
+CoreDNS-1.10.1
+linux/amd64, go1.20.4, 84446ec6
+
+Running: kubectl describe pod kube-proxy-77lnx -n kube-system
+Name:                 kube-proxy-77lnx
+Namespace:            kube-system
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Service Account:      kube-proxy
+Node:                 ip-10-0-2-126.ec2.internal/10.0.2.126
+Start Time:           Mon, 11 Nov 2024 21:01:46 -0500
+Labels:               controller-revision-hash=6f74d9b7f5
+                      k8s-app=kube-proxy
+                      pod-template-generation=1
+Annotations:          <none>
+Status:               Running
+IP:                   10.0.2.126
+IPs:
+  IP:           10.0.2.126
+Controlled By:  DaemonSet/kube-proxy
+Containers:
+  kube-proxy:
+    Container ID:  containerd://3f2a3ca5f2b6d5f79f522cb086446f0478fef3c6af25bbfe47c2a792388e227a
+    Image:         602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/kube-proxy:v1.27.6-minimal-eksbuild.2
+    Image ID:      sha256:c33d2dd0b659124105472ee051783ea377bbffbb301c0424c6c84aa55124d14c
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      kube-proxy
+      --v=2
+      --config=/var/lib/kube-proxy-config/config
+      --hostname-override=$(NODE_NAME)
+    State:          Running
+      Started:      Mon, 11 Nov 2024 21:01:49 -0500
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:  100m
+    Environment:
+      NODE_NAME:   (v1:spec.nodeName)
+    Mounts:
+      /lib/modules from lib-modules (ro)
+      /run/xtables.lock from xtables-lock (rw)
+      /var/lib/kube-proxy-config/ from config (rw)
+      /var/lib/kube-proxy/ from kubeconfig (rw)
+      /var/log from varlog (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-7d6ft (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  varlog:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/log
+    HostPathType:  
+  xtables-lock:
+    Type:          HostPath (bare host directory volume)
+    Path:          /run/xtables.lock
+    HostPathType:  FileOrCreate
+  lib-modules:
+    Type:          HostPath (bare host directory volume)
+    Path:          /lib/modules
+    HostPathType:  
+  kubeconfig:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kube-proxy
+    Optional:  false
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kube-proxy-config
+    Optional:  false
+  kube-api-access-7d6ft:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 op=Exists
+                             node.kubernetes.io/disk-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/network-unavailable:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists
+                             node.kubernetes.io/pid-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/unreachable:NoExecute op=Exists
+                             node.kubernetes.io/unschedulable:NoSchedule op=Exists
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  54m   default-scheduler  Successfully assigned kube-system/kube-proxy-77lnx to ip-10-0-2-126.ec2.internal
+  Normal  Pulled     54m   kubelet            Container image "602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/kube-proxy:v1.27.6-minimal-eksbuild.2" already present on machine
+  Normal  Created    54m   kubelet            Created container kube-proxy
+  Normal  Started    54m   kubelet            Started container kube-proxy
+
+Running: kubectl logs kube-proxy-77lnx -n kube-system
+I1112 02:01:49.839307       1 flags.go:64] FLAG: --bind-address="0.0.0.0"
+I1112 02:01:49.839373       1 flags.go:64] FLAG: --bind-address-hard-fail="false"
+I1112 02:01:49.839380       1 flags.go:64] FLAG: --boot-id-file="/proc/sys/kernel/random/boot_id"
+I1112 02:01:49.839386       1 flags.go:64] FLAG: --cleanup="false"
+I1112 02:01:49.839391       1 flags.go:64] FLAG: --cluster-cidr=""
+I1112 02:01:49.839397       1 flags.go:64] FLAG: --config="/var/lib/kube-proxy-config/config"
+I1112 02:01:49.839402       1 flags.go:64] FLAG: --config-sync-period="15m0s"
+I1112 02:01:49.839410       1 flags.go:64] FLAG: --conntrack-max-per-core="32768"
+I1112 02:01:49.839416       1 flags.go:64] FLAG: --conntrack-min="131072"
+I1112 02:01:49.839423       1 flags.go:64] FLAG: --conntrack-tcp-timeout-close-wait="1h0m0s"
+I1112 02:01:49.839429       1 flags.go:64] FLAG: --conntrack-tcp-timeout-established="24h0m0s"
+I1112 02:01:49.839436       1 flags.go:64] FLAG: --detect-local-mode=""
+I1112 02:01:49.839449       1 flags.go:64] FLAG: --feature-gates=""
+I1112 02:01:49.839456       1 flags.go:64] FLAG: --healthz-bind-address="0.0.0.0:10256"
+I1112 02:01:49.839469       1 flags.go:64] FLAG: --healthz-port="10256"
+I1112 02:01:49.839475       1 flags.go:64] FLAG: --help="false"
+I1112 02:01:49.839484       1 flags.go:64] FLAG: --hostname-override="ip-10-0-2-126.ec2.internal"
+I1112 02:01:49.839497       1 flags.go:64] FLAG: --iptables-localhost-nodeports="true"
+I1112 02:01:49.839502       1 flags.go:64] FLAG: --iptables-masquerade-bit="14"
+I1112 02:01:49.839507       1 flags.go:64] FLAG: --iptables-min-sync-period="1s"
+I1112 02:01:49.839513       1 flags.go:64] FLAG: --iptables-sync-period="30s"
+I1112 02:01:49.839517       1 flags.go:64] FLAG: --ipvs-exclude-cidrs="[]"
+I1112 02:01:49.839526       1 flags.go:64] FLAG: --ipvs-min-sync-period="0s"
+I1112 02:01:49.839531       1 flags.go:64] FLAG: --ipvs-scheduler=""
+I1112 02:01:49.839536       1 flags.go:64] FLAG: --ipvs-strict-arp="false"
+I1112 02:01:49.839541       1 flags.go:64] FLAG: --ipvs-sync-period="30s"
+I1112 02:01:49.839545       1 flags.go:64] FLAG: --ipvs-tcp-timeout="0s"
+I1112 02:01:49.839664       1 flags.go:64] FLAG: --ipvs-tcpfin-timeout="0s"
+I1112 02:01:49.839671       1 flags.go:64] FLAG: --ipvs-udp-timeout="0s"
+I1112 02:01:49.839676       1 flags.go:64] FLAG: --kube-api-burst="10"
+I1112 02:01:49.839680       1 flags.go:64] FLAG: --kube-api-content-type="application/vnd.kubernetes.protobuf"
+I1112 02:01:49.839687       1 flags.go:64] FLAG: --kube-api-qps="5"
+I1112 02:01:49.839696       1 flags.go:64] FLAG: --kubeconfig=""
+I1112 02:01:49.839701       1 flags.go:64] FLAG: --log-flush-frequency="5s"
+I1112 02:01:49.839709       1 flags.go:64] FLAG: --machine-id-file="/etc/machine-id,/var/lib/dbus/machine-id"
+I1112 02:01:49.839718       1 flags.go:64] FLAG: --masquerade-all="false"
+I1112 02:01:49.839723       1 flags.go:64] FLAG: --master=""
+I1112 02:01:49.839729       1 flags.go:64] FLAG: --metrics-bind-address="127.0.0.1:10249"
+I1112 02:01:49.839735       1 flags.go:64] FLAG: --metrics-port="10249"
+I1112 02:01:49.839741       1 flags.go:64] FLAG: --nodeport-addresses="[]"
+I1112 02:01:49.839759       1 flags.go:64] FLAG: --oom-score-adj="-999"
+I1112 02:01:49.839763       1 flags.go:64] FLAG: --pod-bridge-interface=""
+I1112 02:01:49.839768       1 flags.go:64] FLAG: --pod-interface-name-prefix=""
+I1112 02:01:49.839773       1 flags.go:64] FLAG: --profiling="false"
+I1112 02:01:49.839778       1 flags.go:64] FLAG: --proxy-mode=""
+I1112 02:01:49.839798       1 flags.go:64] FLAG: --proxy-port-range=""
+I1112 02:01:49.839805       1 flags.go:64] FLAG: --show-hidden-metrics-for-version=""
+I1112 02:01:49.839810       1 flags.go:64] FLAG: --v="2"
+I1112 02:01:49.839815       1 flags.go:64] FLAG: --version="false"
+I1112 02:01:49.839827       1 flags.go:64] FLAG: --vmodule=""
+I1112 02:01:49.839834       1 flags.go:64] FLAG: --write-config-to=""
+I1112 02:01:49.840923       1 server.go:434] "Using lenient decoding as strict decoding failed" err="strict decoding error: unknown field \"udpIdleTimeout\""
+I1112 02:01:49.841053       1 feature_gate.go:249] feature gates: &{map[]}
+I1112 02:01:49.841133       1 feature_gate.go:249] feature gates: &{map[]}
+I1112 02:01:49.853901       1 node.go:141] Successfully retrieved node IP: 10.0.2.126
+I1112 02:01:49.853935       1 server_others.go:110] "Detected node IP" address="10.0.2.126"
+I1112 02:01:49.853959       1 server_others.go:149] "DetectLocalMode" localMode="ClusterCIDR"
+I1112 02:01:49.899907       1 server_others.go:192] "Using iptables Proxier"
+I1112 02:01:49.900409       1 server_others.go:199] "kube-proxy running in dual-stack mode" ipFamily=IPv4
+I1112 02:01:49.900428       1 server_others.go:200] "Creating dualStackProxier for iptables"
+I1112 02:01:49.900448       1 server_others.go:468] "Detect-local-mode set to ClusterCIDR, but no cluster CIDR defined"
+I1112 02:01:49.900458       1 server_others.go:524] "Defaulting to no-op detect-local" detectLocalMode="ClusterCIDR"
+I1112 02:01:49.900502       1 proxier.go:253] "Setting route_localnet=1 to allow node-ports on localhost; to change this either disable iptables.localhostNodePorts (--iptables-localhost-nodeports) or set nodePortAddresses (--nodeport-addresses) to filter loopback addresses"
+I1112 02:01:49.900601       1 utils.go:345] "Changed sysctl" name="net/ipv4/conf/all/route_localnet" before=0 after=1
+I1112 02:01:49.901071       1 proxier.go:269] "Using iptables mark for masquerade" ipFamily=IPv4 mark="0x00004000"
+I1112 02:01:49.901352       1 proxier.go:303] "Iptables sync params" ipFamily=IPv4 minSyncPeriod="1s" syncPeriod="30s" burstSyncs=2
+I1112 02:01:49.901434       1 proxier.go:313] "Iptables supports --random-fully" ipFamily=IPv4
+I1112 02:01:49.901519       1 proxier.go:269] "Using iptables mark for masquerade" ipFamily=IPv6 mark="0x00004000"
+I1112 02:01:49.901908       1 proxier.go:303] "Iptables sync params" ipFamily=IPv6 minSyncPeriod="1s" syncPeriod="30s" burstSyncs=2
+I1112 02:01:49.902011       1 proxier.go:313] "Iptables supports --random-fully" ipFamily=IPv6
+I1112 02:01:49.902205       1 server.go:658] "Version info" version="v1.27.6-eks-f8587cb"
+I1112 02:01:49.902217       1 server.go:660] "Golang settings" GOGC="" GOMAXPROCS="" GOTRACEBACK=""
+I1112 02:01:49.904457       1 conntrack.go:100] "Set sysctl" entry="net/netfilter/nf_conntrack_max" value=131072
+I1112 02:01:49.904489       1 conntrack.go:52] "Setting nf_conntrack_max" nfConntrackMax=131072
+I1112 02:01:49.905018       1 conntrack.go:83] "Setting conntrack hashsize" conntrackHashsize=32768
+I1112 02:01:49.920244       1 conntrack.go:100] "Set sysctl" entry="net/netfilter/nf_conntrack_tcp_timeout_close_wait" value=3600
+I1112 02:01:49.920578       1 config.go:97] "Starting endpoint slice config controller"
+I1112 02:01:49.920655       1 shared_informer.go:311] Waiting for caches to sync for endpoint slice config
+I1112 02:01:49.920742       1 config.go:188] "Starting service config controller"
+I1112 02:01:49.920864       1 shared_informer.go:311] Waiting for caches to sync for service config
+I1112 02:01:49.922921       1 config.go:315] "Starting node config controller"
+I1112 02:01:49.924098       1 shared_informer.go:311] Waiting for caches to sync for node config
+I1112 02:01:49.926109       1 proxier.go:814] "Not syncing iptables until Services and Endpoints have been received from master"
+I1112 02:01:49.926266       1 proxier.go:814] "Not syncing iptables until Services and Endpoints have been received from master"
+I1112 02:01:50.021352       1 shared_informer.go:318] Caches are synced for service config
+I1112 02:01:50.021424       1 proxier.go:814] "Not syncing iptables until Services and Endpoints have been received from master"
+I1112 02:01:50.021457       1 proxier.go:814] "Not syncing iptables until Services and Endpoints have been received from master"
+I1112 02:01:50.021502       1 shared_informer.go:318] Caches are synced for endpoint slice config
+I1112 02:01:50.021812       1 proxier.go:857] "Syncing iptables rules"
+I1112 02:01:50.024372       1 shared_informer.go:318] Caches are synced for node config
+I1112 02:01:50.104673       1 proxier.go:1573] "Reloading service iptables data" numServices=3 numEndpoints=2 numFilterChains=6 numFilterRules=6 numNATChains=7 numNATRules=12
+I1112 02:01:50.152101       1 proxier.go:822] "SyncProxyRules complete" elapsed="130.563708ms"
+I1112 02:01:50.152131       1 proxier.go:857] "Syncing iptables rules"
+I1112 02:01:50.226258       1 proxier.go:1573] "Reloading service iptables data" numServices=0 numEndpoints=0 numFilterChains=5 numFilterRules=3 numNATChains=4 numNATRules=5
+I1112 02:01:50.227909       1 proxier.go:822] "SyncProxyRules complete" elapsed="75.777512ms"
+I1112 02:01:54.980428       1 proxier.go:857] "Syncing iptables rules"
+I1112 02:01:55.008116       1 proxier.go:1573] "Reloading service iptables data" numServices=3 numEndpoints=4 numFilterChains=6 numFilterRules=6 numNATChains=4 numNATRules=6
+I1112 02:01:55.015758       1 proxier.go:822] "SyncProxyRules complete" elapsed="35.403964ms"
+I1112 02:01:55.016034       1 proxier.go:857] "Syncing iptables rules"
+I1112 02:01:55.025615       1 proxier.go:1573] "Reloading service iptables data" numServices=3 numEndpoints=6 numFilterChains=6 numFilterRules=4 numNATChains=10 numNATRules=20
+I1112 02:01:55.059493       1 proxier.go:822] "SyncProxyRules complete" elapsed="43.550997ms"
+
+Running: kubectl describe pod kube-proxy-tl5xb -n kube-system
+Name:                 kube-proxy-tl5xb
+Namespace:            kube-system
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Service Account:      kube-proxy
+Node:                 ip-10-0-1-244.ec2.internal/10.0.1.244
+Start Time:           Mon, 11 Nov 2024 21:01:40 -0500
+Labels:               controller-revision-hash=6f74d9b7f5
+                      k8s-app=kube-proxy
+                      pod-template-generation=1
+Annotations:          <none>
+Status:               Running
+IP:                   10.0.1.244
+IPs:
+  IP:           10.0.1.244
+Controlled By:  DaemonSet/kube-proxy
+Containers:
+  kube-proxy:
+    Container ID:  containerd://d90bf2a3fb4f82e80a16d93bea2618188d829be1251f6290fb8742552a4fecad
+    Image:         602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/kube-proxy:v1.27.6-minimal-eksbuild.2
+    Image ID:      sha256:c33d2dd0b659124105472ee051783ea377bbffbb301c0424c6c84aa55124d14c
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      kube-proxy
+      --v=2
+      --config=/var/lib/kube-proxy-config/config
+      --hostname-override=$(NODE_NAME)
+    State:          Running
+      Started:      Mon, 11 Nov 2024 21:01:45 -0500
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:  100m
+    Environment:
+      NODE_NAME:   (v1:spec.nodeName)
+    Mounts:
+      /lib/modules from lib-modules (ro)
+      /run/xtables.lock from xtables-lock (rw)
+      /var/lib/kube-proxy-config/ from config (rw)
+      /var/lib/kube-proxy/ from kubeconfig (rw)
+      /var/log from varlog (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-wwkpv (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  varlog:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/log
+    HostPathType:  
+  xtables-lock:
+    Type:          HostPath (bare host directory volume)
+    Path:          /run/xtables.lock
+    HostPathType:  FileOrCreate
+  lib-modules:
+    Type:          HostPath (bare host directory volume)
+    Path:          /lib/modules
+    HostPathType:  
+  kubeconfig:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kube-proxy
+    Optional:  false
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kube-proxy-config
+    Optional:  false
+  kube-api-access-wwkpv:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 op=Exists
+                             node.kubernetes.io/disk-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/network-unavailable:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists
+                             node.kubernetes.io/pid-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/unreachable:NoExecute op=Exists
+                             node.kubernetes.io/unschedulable:NoSchedule op=Exists
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  54m   default-scheduler  Successfully assigned kube-system/kube-proxy-tl5xb to ip-10-0-1-244.ec2.internal
+  Normal  Pulled     54m   kubelet            Container image "602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/kube-proxy:v1.27.6-minimal-eksbuild.2" already present on machine
+  Normal  Created    54m   kubelet            Created container kube-proxy
+  Normal  Started    54m   kubelet            Started container kube-proxy
+
+Running: kubectl logs kube-proxy-tl5xb -n kube-system
+I1112 02:01:45.274969       1 flags.go:64] FLAG: --bind-address="0.0.0.0"
+I1112 02:01:45.275049       1 flags.go:64] FLAG: --bind-address-hard-fail="false"
+I1112 02:01:45.275056       1 flags.go:64] FLAG: --boot-id-file="/proc/sys/kernel/random/boot_id"
+I1112 02:01:45.275062       1 flags.go:64] FLAG: --cleanup="false"
+I1112 02:01:45.275066       1 flags.go:64] FLAG: --cluster-cidr=""
+I1112 02:01:45.275073       1 flags.go:64] FLAG: --config="/var/lib/kube-proxy-config/config"
+I1112 02:01:45.275077       1 flags.go:64] FLAG: --config-sync-period="15m0s"
+I1112 02:01:45.275085       1 flags.go:64] FLAG: --conntrack-max-per-core="32768"
+I1112 02:01:45.275091       1 flags.go:64] FLAG: --conntrack-min="131072"
+I1112 02:01:45.275097       1 flags.go:64] FLAG: --conntrack-tcp-timeout-close-wait="1h0m0s"
+I1112 02:01:45.275102       1 flags.go:64] FLAG: --conntrack-tcp-timeout-established="24h0m0s"
+I1112 02:01:45.275109       1 flags.go:64] FLAG: --detect-local-mode=""
+I1112 02:01:45.275120       1 flags.go:64] FLAG: --feature-gates=""
+I1112 02:01:45.275127       1 flags.go:64] FLAG: --healthz-bind-address="0.0.0.0:10256"
+I1112 02:01:45.275140       1 flags.go:64] FLAG: --healthz-port="10256"
+I1112 02:01:45.275146       1 flags.go:64] FLAG: --help="false"
+I1112 02:01:45.275151       1 flags.go:64] FLAG: --hostname-override="ip-10-0-1-244.ec2.internal"
+I1112 02:01:45.275157       1 flags.go:64] FLAG: --iptables-localhost-nodeports="true"
+I1112 02:01:45.275163       1 flags.go:64] FLAG: --iptables-masquerade-bit="14"
+I1112 02:01:45.275168       1 flags.go:64] FLAG: --iptables-min-sync-period="1s"
+I1112 02:01:45.275174       1 flags.go:64] FLAG: --iptables-sync-period="30s"
+I1112 02:01:45.275179       1 flags.go:64] FLAG: --ipvs-exclude-cidrs="[]"
+I1112 02:01:45.275196       1 flags.go:64] FLAG: --ipvs-min-sync-period="0s"
+I1112 02:01:45.275200       1 flags.go:64] FLAG: --ipvs-scheduler=""
+I1112 02:01:45.275205       1 flags.go:64] FLAG: --ipvs-strict-arp="false"
+I1112 02:01:45.275211       1 flags.go:64] FLAG: --ipvs-sync-period="30s"
+I1112 02:01:45.275216       1 flags.go:64] FLAG: --ipvs-tcp-timeout="0s"
+I1112 02:01:45.275222       1 flags.go:64] FLAG: --ipvs-tcpfin-timeout="0s"
+I1112 02:01:45.275227       1 flags.go:64] FLAG: --ipvs-udp-timeout="0s"
+I1112 02:01:45.275232       1 flags.go:64] FLAG: --kube-api-burst="10"
+I1112 02:01:45.275243       1 flags.go:64] FLAG: --kube-api-content-type="application/vnd.kubernetes.protobuf"
+I1112 02:01:45.275253       1 flags.go:64] FLAG: --kube-api-qps="5"
+I1112 02:01:45.275268       1 flags.go:64] FLAG: --kubeconfig=""
+I1112 02:01:45.275273       1 flags.go:64] FLAG: --log-flush-frequency="5s"
+I1112 02:01:45.275279       1 flags.go:64] FLAG: --machine-id-file="/etc/machine-id,/var/lib/dbus/machine-id"
+I1112 02:01:45.275285       1 flags.go:64] FLAG: --masquerade-all="false"
+I1112 02:01:45.275291       1 flags.go:64] FLAG: --master=""
+I1112 02:01:45.275296       1 flags.go:64] FLAG: --metrics-bind-address="127.0.0.1:10249"
+I1112 02:01:45.275302       1 flags.go:64] FLAG: --metrics-port="10249"
+I1112 02:01:45.275307       1 flags.go:64] FLAG: --nodeport-addresses="[]"
+I1112 02:01:45.275320       1 flags.go:64] FLAG: --oom-score-adj="-999"
+I1112 02:01:45.275325       1 flags.go:64] FLAG: --pod-bridge-interface=""
+I1112 02:01:45.275331       1 flags.go:64] FLAG: --pod-interface-name-prefix=""
+I1112 02:01:45.275335       1 flags.go:64] FLAG: --profiling="false"
+I1112 02:01:45.275339       1 flags.go:64] FLAG: --proxy-mode=""
+I1112 02:01:45.275345       1 flags.go:64] FLAG: --proxy-port-range=""
+I1112 02:01:45.275352       1 flags.go:64] FLAG: --show-hidden-metrics-for-version=""
+I1112 02:01:45.275361       1 flags.go:64] FLAG: --v="2"
+I1112 02:01:45.275368       1 flags.go:64] FLAG: --version="false"
+I1112 02:01:45.275381       1 flags.go:64] FLAG: --vmodule=""
+I1112 02:01:45.275388       1 flags.go:64] FLAG: --write-config-to=""
+I1112 02:01:45.276347       1 server.go:434] "Using lenient decoding as strict decoding failed" err="strict decoding error: unknown field \"udpIdleTimeout\""
+I1112 02:01:45.276491       1 feature_gate.go:249] feature gates: &{map[]}
+I1112 02:01:45.276584       1 feature_gate.go:249] feature gates: &{map[]}
+I1112 02:01:45.288218       1 node.go:141] Successfully retrieved node IP: 10.0.1.244
+I1112 02:01:45.288252       1 server_others.go:110] "Detected node IP" address="10.0.1.244"
+I1112 02:01:45.288312       1 server_others.go:149] "DetectLocalMode" localMode="ClusterCIDR"
+I1112 02:01:45.332694       1 server_others.go:192] "Using iptables Proxier"
+I1112 02:01:45.332808       1 server_others.go:199] "kube-proxy running in dual-stack mode" ipFamily=IPv4
+I1112 02:01:45.332823       1 server_others.go:200] "Creating dualStackProxier for iptables"
+I1112 02:01:45.332833       1 server_others.go:468] "Detect-local-mode set to ClusterCIDR, but no cluster CIDR defined"
+I1112 02:01:45.333014       1 server_others.go:524] "Defaulting to no-op detect-local" detectLocalMode="ClusterCIDR"
+I1112 02:01:45.333056       1 proxier.go:253] "Setting route_localnet=1 to allow node-ports on localhost; to change this either disable iptables.localhostNodePorts (--iptables-localhost-nodeports) or set nodePortAddresses (--nodeport-addresses) to filter loopback addresses"
+I1112 02:01:45.333161       1 utils.go:345] "Changed sysctl" name="net/ipv4/conf/all/route_localnet" before=0 after=1
+I1112 02:01:45.333197       1 proxier.go:269] "Using iptables mark for masquerade" ipFamily=IPv4 mark="0x00004000"
+I1112 02:01:45.333346       1 proxier.go:303] "Iptables sync params" ipFamily=IPv4 minSyncPeriod="1s" syncPeriod="30s" burstSyncs=2
+I1112 02:01:45.333393       1 proxier.go:313] "Iptables supports --random-fully" ipFamily=IPv4
+I1112 02:01:45.333429       1 proxier.go:269] "Using iptables mark for masquerade" ipFamily=IPv6 mark="0x00004000"
+I1112 02:01:45.333526       1 proxier.go:303] "Iptables sync params" ipFamily=IPv6 minSyncPeriod="1s" syncPeriod="30s" burstSyncs=2
+I1112 02:01:45.333545       1 proxier.go:313] "Iptables supports --random-fully" ipFamily=IPv6
+I1112 02:01:45.333705       1 server.go:658] "Version info" version="v1.27.6-eks-f8587cb"
+I1112 02:01:45.333716       1 server.go:660] "Golang settings" GOGC="" GOMAXPROCS="" GOTRACEBACK=""
+I1112 02:01:45.335031       1 conntrack.go:100] "Set sysctl" entry="net/netfilter/nf_conntrack_max" value=131072
+I1112 02:01:45.335058       1 conntrack.go:52] "Setting nf_conntrack_max" nfConntrackMax=131072
+I1112 02:01:45.335556       1 conntrack.go:83] "Setting conntrack hashsize" conntrackHashsize=32768
+I1112 02:01:45.345406       1 conntrack.go:100] "Set sysctl" entry="net/netfilter/nf_conntrack_tcp_timeout_close_wait" value=3600
+I1112 02:01:45.345624       1 config.go:188] "Starting service config controller"
+I1112 02:01:45.345642       1 shared_informer.go:311] Waiting for caches to sync for service config
+I1112 02:01:45.345715       1 config.go:97] "Starting endpoint slice config controller"
+I1112 02:01:45.345721       1 shared_informer.go:311] Waiting for caches to sync for endpoint slice config
+I1112 02:01:45.346297       1 config.go:315] "Starting node config controller"
+I1112 02:01:45.346305       1 shared_informer.go:311] Waiting for caches to sync for node config
+I1112 02:01:45.348849       1 proxier.go:814] "Not syncing iptables until Services and Endpoints have been received from master"
+I1112 02:01:45.348922       1 proxier.go:814] "Not syncing iptables until Services and Endpoints have been received from master"
+I1112 02:01:45.446578       1 shared_informer.go:318] Caches are synced for service config
+I1112 02:01:45.446578       1 shared_informer.go:318] Caches are synced for node config
+I1112 02:01:45.446613       1 shared_informer.go:318] Caches are synced for endpoint slice config
+I1112 02:01:45.446623       1 proxier.go:814] "Not syncing iptables until Services and Endpoints have been received from master"
+I1112 02:01:45.446663       1 proxier.go:814] "Not syncing iptables until Services and Endpoints have been received from master"
+I1112 02:01:45.446762       1 proxier.go:857] "Syncing iptables rules"
+I1112 02:01:45.517229       1 proxier.go:1573] "Reloading service iptables data" numServices=3 numEndpoints=2 numFilterChains=6 numFilterRules=6 numNATChains=7 numNATRules=12
+I1112 02:01:45.550752       1 proxier.go:822] "SyncProxyRules complete" elapsed="104.058883ms"
+I1112 02:01:45.550788       1 proxier.go:857] "Syncing iptables rules"
+I1112 02:01:45.638165       1 proxier.go:1573] "Reloading service iptables data" numServices=0 numEndpoints=0 numFilterChains=5 numFilterRules=3 numNATChains=4 numNATRules=5
+I1112 02:01:45.643206       1 proxier.go:822] "SyncProxyRules complete" elapsed="92.417547ms"
+I1112 02:01:54.973253       1 proxier.go:857] "Syncing iptables rules"
+I1112 02:01:54.977344       1 proxier.go:1573] "Reloading service iptables data" numServices=3 numEndpoints=4 numFilterChains=6 numFilterRules=6 numNATChains=4 numNATRules=6
+I1112 02:01:54.982193       1 proxier.go:822] "SyncProxyRules complete" elapsed="9.010985ms"
+I1112 02:01:54.985999       1 proxier.go:857] "Syncing iptables rules"
+I1112 02:01:54.989815       1 proxier.go:1573] "Reloading service iptables data" numServices=3 numEndpoints=6 numFilterChains=6 numFilterRules=4 numNATChains=8 numNATRules=14
+I1112 02:01:55.005979       1 proxier.go:822] "SyncProxyRules complete" elapsed="20.038315ms"
+I1112 02:01:56.007209       1 proxier.go:857] "Syncing iptables rules"
+I1112 02:01:56.011533       1 proxier.go:1573] "Reloading service iptables data" numServices=3 numEndpoints=6 numFilterChains=6 numFilterRules=4 numNATChains=10 numNATRules=20
+I1112 02:01:56.016322       1 proxier.go:822] "SyncProxyRules complete" elapsed="9.202868ms"
+
+Discovered API server URL: https://25E887BD6181F7A8B822F14747AF241C.gr7.us-east-1.eks.amazonaws.com
+Discovered API server hostname: 25E887BD6181F7A8B822F14747AF241C.gr7.us-east-1.eks.amazonaws.com
+Running: kubectl get nodes --request-timeout=60s
+NAME                         STATUS   ROLES    AGE   VERSION
+ip-10-0-1-244.ec2.internal   Ready    <none>   54m   v1.27.16-eks-a737599
+ip-10-0-2-126.ec2.internal   Ready    <none>   54m   v1.27.16-eks-a737599
+
+Running: kubectl get events --sort-by='.metadata.creationTimestamp'
+LAST SEEN   TYPE      REASON                    OBJECT                            MESSAGE
+54m         Normal    Starting                  node/ip-10-0-1-244.ec2.internal   Starting kubelet.
+54m         Warning   InvalidDiskCapacity       node/ip-10-0-1-244.ec2.internal   invalid capacity 0 on image filesystem
+54m         Normal    NodeHasSufficientMemory   node/ip-10-0-1-244.ec2.internal   Node ip-10-0-1-244.ec2.internal status is now: NodeHasSufficientMemory
+54m         Normal    NodeHasNoDiskPressure     node/ip-10-0-1-244.ec2.internal   Node ip-10-0-1-244.ec2.internal status is now: NodeHasNoDiskPressure
+54m         Normal    NodeHasSufficientPID      node/ip-10-0-1-244.ec2.internal   Node ip-10-0-1-244.ec2.internal status is now: NodeHasSufficientPID
+54m         Normal    NodeAllocatableEnforced   node/ip-10-0-1-244.ec2.internal   Updated Node Allocatable limit across pods
+54m         Normal    RegisteredNode            node/ip-10-0-1-244.ec2.internal   Node ip-10-0-1-244.ec2.internal event: Registered Node ip-10-0-1-244.ec2.internal in Controller
+54m         Normal    Synced                    node/ip-10-0-1-244.ec2.internal   Node synced successfully
+54m         Normal    Starting                  node/ip-10-0-2-126.ec2.internal   Starting kubelet.
+54m         Normal    Starting                  node/ip-10-0-1-244.ec2.internal   
+54m         Warning   InvalidDiskCapacity       node/ip-10-0-2-126.ec2.internal   invalid capacity 0 on image filesystem
+54m         Normal    NodeHasSufficientMemory   node/ip-10-0-2-126.ec2.internal   Node ip-10-0-2-126.ec2.internal status is now: NodeHasSufficientMemory
+54m         Normal    NodeHasNoDiskPressure     node/ip-10-0-2-126.ec2.internal   Node ip-10-0-2-126.ec2.internal status is now: NodeHasNoDiskPressure
+54m         Normal    NodeHasSufficientPID      node/ip-10-0-2-126.ec2.internal   Node ip-10-0-2-126.ec2.internal status is now: NodeHasSufficientPID
+54m         Normal    NodeAllocatableEnforced   node/ip-10-0-2-126.ec2.internal   Updated Node Allocatable limit across pods
+54m         Normal    Synced                    node/ip-10-0-2-126.ec2.internal   Node synced successfully
+54m         Normal    Starting                  node/ip-10-0-2-126.ec2.internal   
+54m         Normal    RegisteredNode            node/ip-10-0-2-126.ec2.internal   Node ip-10-0-2-126.ec2.internal event: Registered Node ip-10-0-2-126.ec2.internal in Controller
+54m         Normal    NodeReady                 node/ip-10-0-1-244.ec2.internal   Node ip-10-0-1-244.ec2.internal status is now: NodeReady
+54m         Normal    NodeReady                 node/ip-10-0-2-126.ec2.internal   Node ip-10-0-2-126.ec2.internal status is now: NodeReady
+
+All checks completed successfully.

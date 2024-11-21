@@ -1,0 +1,10 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "deny-ingress-frontend"
+spec:
+  endpointSelector:
+    matchLabels:
+      app: frontend
+  ingress:
+  - {}

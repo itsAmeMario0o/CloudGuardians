@@ -1,0 +1,10 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "deny-ingress-games"
+spec:
+  endpointSelector:
+    matchLabels:
+      app: mario
+  ingress:
+  - {}
